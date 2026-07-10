@@ -9,7 +9,7 @@ podman run \
    --replace \
    -it \
    -p 9345:22 \
-   --userns=auto:size=65535\
+   --userns=auto:size=2000\
    --secret ai_execution_sandbox_authorized_keys \
    --secret ai_execution_sandbox_ssh_private_key \
    --name secure_execution_sandbox \
