@@ -1,0 +1,4 @@
+This file should contain two files
+
+1. `ssh_private_key` - the ssh private key of the ai container
+2. `authorized_keys` - the ssh public key of the controlling system
