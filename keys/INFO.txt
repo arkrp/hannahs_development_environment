@@ -1,0 +1,7 @@
+This folder should container five keys with the exact specified names:
+
+admin_public_key - The ssh public key corresponding to the device which you will be using to access the development environment.
+dev_private_key - The ssh key which verifies the dev (priveleged account)'s identity
+dev_public_key - The corresponding public key for dev_private_key. Distribute this to grant the dev container access! (for sshfs or other)
+sandbox_private_key - The ssh key which verifies the sandbox (isolated unpriveleged)'s identity
+sandbox_public_key - The corresponding public key to sandbox_private_key.
