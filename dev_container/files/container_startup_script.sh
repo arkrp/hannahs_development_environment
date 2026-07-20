@@ -4,6 +4,7 @@ mkdir /home/dev/.ssh
 cp -R /run/secrets/admin_public_key /home/dev/.ssh/authorized_keys
 cp -R /run/secrets/dev_private_key /home/dev/.ssh/id_rsa
 chown -R dev:dev /home/dev/.ssh
+chmod 600 /home/dev/.ssh/id_rsa
 mkdir /home/sandbox/.ssh
 cp -R /run/secrets/sandbox_public_key /home/sandbox/.ssh/authorized_keys
 chown -R sandbox:sandbox /home/sandbox/.ssh

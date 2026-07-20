@@ -4,7 +4,9 @@ RUN apt-get update && apt-get -y install \
    ssh \
    sshfs
 RUN useradd -m dev
+RUN chsh -s /bin/bash dev
 RUN useradd -m sandbox
+RUN chsh -s /bin/bash sandbox
 RUN groupadd -g 995 sshd
 RUN usermod -g 995 sshd
 COPY ./files/container_startup_script.sh /app/container_startup_script.sh
