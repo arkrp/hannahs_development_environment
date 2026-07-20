@@ -11,3 +11,7 @@ X11Forwarding yes
 PrintMotd no
 AcceptEnv LANG LC_* COLORTERM NO_COLOR
 Subsystem       sftp    /usr/lib/openssh/sftp-server
+Match User sandbox
+   X11Forwarding no
+   AllowTcpForwarding no
+   ForceCommand internal-sftp
