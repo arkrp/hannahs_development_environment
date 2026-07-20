@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "Hello World!"
+set -e
 access_port=9000 # The port which the user should use to ssh into the dev contianer.
 project_directory=$(realpath $(dirname $BASH_SOURCE))
 #section-start build containers if needed
