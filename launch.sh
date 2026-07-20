@@ -26,6 +26,8 @@ podman run \
    -d \
    -p 9345:22 \
    --network bridge \
+   --device /dev/fuse \
+   --cap-add SYS_ADMIN \
    --userns=auto:size=2000 \
    --secret dev_key.pub \
    --secret dev_host_key.pub \
