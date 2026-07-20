@@ -4,6 +4,7 @@ PasswordAuthentication no
 KbdInteractiveAuthentication no
 ChallengeResponseAuthentication no
 UsePAM yes
+HostKey /etc/ssh/dev_host_key
 AllowAgentForwarding no
 AllowTcpForwarding yes
 X11Forwarding yes
