@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "loading ssh keys"
 mkdir /home/sandbox/.ssh
-cp -R /run/secrets/dev_public_key /home/sandbox/.ssh/authorized_keys
-cp -R /run/secrets/sandbox_private_key /home/sandbox/.ssh/id_rsa
+cp -R /run/secrets/dev_key.pub /home/sandbox/.ssh/authorized_keys
+cp -R /run/secrets/sandbox_key /home/sandbox/.ssh/id_rsa
 chown -R sandbox:sandbox /home/sandbox/.ssh
 chmod 600 /home/sandbox/.ssh/id_rsa
 echo "activating sshd"

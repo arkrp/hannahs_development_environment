@@ -1,5 +1,9 @@
-admin_public_key
-dev_public_key
-dev_private_key
-sandbox_public_key
-sandbox_private_key
+admin_key.pub
+dev_key
+dev_key.pub
+sandbox_key
+sandbox_key.pub
+dev_host_key
+dev_host_key.pub
+sandbox_host_key
+sandbox_host_key.pub

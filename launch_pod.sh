@@ -26,8 +26,8 @@ podman run \
    -p 9345:22 \
    --network bridge \
    --userns=auto:size=2000 \
-   --secret dev_public_key \
-   --secret sandbox_private_key \
+   --secret dev_key.pub \
+   --secret sandbox_key \
    --name sandbox_container \
    --hostname sandbox_container \
    sandbox_container
@@ -36,9 +36,9 @@ podman run \
    -p 9000:22 \
    --network bridge \
    --userns=auto:size=2000 \
-   --secret dev_private_key \
-   --secret admin_public_key \
-   --secret sandbox_public_key \
+   --secret dev_key \
+   --secret admin_key.pub \
+   --secret sandbox_key.pub \
    --hostname dev_container \
    --name dev_container \
    dev_container
