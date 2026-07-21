@@ -33,6 +33,7 @@ podman run \
    -d \
    -p 9000:22 \
    -v dev_ssh_directory:/home/dev/.ssh \
+   -v workspace:/app/workspace \
    --network bridge \
    --userns=auto:size=2000 \
    --secret dev_key \
