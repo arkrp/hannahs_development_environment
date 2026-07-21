@@ -16,7 +16,3 @@ declare_secret () {
 declare_secret "admin_key.pub"
 declare_secret "dev_key"
 declare_secret "dev_key.pub"
-declare_secret "sandbox_key"
-declare_secret "sandbox_key.pub"
-declare_secret "dev_host_key"
-declare_secret "dev_host_key.pub"

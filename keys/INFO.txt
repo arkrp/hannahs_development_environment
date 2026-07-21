@@ -1,7 +1,5 @@
 This folder should container five keys with the exact specified names:
 
-Keys which are important:
-
 admin_key.pub
    The ssh public key corresponding to the device which you will be using to access the development environment.
 dev_key
@@ -9,20 +7,5 @@ dev_key
 dev_key.pub
    The corresponding public key for dev_private_key. Distribute this to grant the dev container access! (for sshfs or other)
 
-Keys which must exist but are not that important
-
-sandbox_key
-   The ssh key which verifies the sandbox (isolated unpriveleged)'s identity
-sandbox_key.pub
-   The corresponding public key to sandbox_private_key.
-dev_host_key
-   key to prove identity as the dev_container ssh host.
-dev_host_key.pub
-   key that denotes the identity of the dev_container ssh host.
-sandbox_host_key
-   key to prove identity as the sandbox_container ssh host.
-sandbox_host_key.pub
-   key that denotes the identity of the sandbox_container ssh host.
-
-Note:
-hannahnelson@HannahBotV2:~/custom_development_environment/keys$ ssh-keygen -t ed25519 -C "root@dev" -f $(pwd)/dev_host_key
+You make keys with a command that looks like this:
+   ssh-keygen -t ed25519 -C "dev@dev" -f $(pwd)/dev_key
