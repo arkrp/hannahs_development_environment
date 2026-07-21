@@ -23,8 +23,6 @@ podman run \
    -v workspace:/home/sandbox/workspace:U \
    --userns=auto:size=2000 \
    --secret dev_key.pub \
-   --secret dev_host_key.pub \
-   --secret sandbox_key \
    --name sandbox_container \
    --hostname sandbox_container \
    sandbox_container
@@ -37,9 +35,7 @@ podman run \
    --cap-add SYS_ADMIN \
    --userns=auto:size=2000 \
    --secret dev_key \
-   --secret dev_host_key \
    --secret admin_key.pub \
-   --secret sandbox_key.pub \
    --hostname dev_container \
    --name dev_container \
    dev_container
