@@ -20,7 +20,7 @@ podman run \
    -d \
    -p 9345:22 \
    --network bridge \
-   -v workspace:/home/sandbox/workspace:U \
+   -v workspace:/home/dev/workspace \
    --userns=auto:size=2000 \
    --secret dev_key.pub \
    --name sandbox_container \
