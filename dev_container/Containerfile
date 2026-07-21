@@ -9,9 +9,6 @@ RUN useradd -m sandbox
 RUN chsh -s /bin/bash sandbox
 RUN groupadd -g 995 sshd
 RUN usermod -g 995 sshd
-RUN mkdir /app/workspace
-RUN chown dev:dev workspace
-RUN chmod 777 workspace
 COPY ./files/container_startup_script.sh /app/container_startup_script.sh
 COPY ./files/sshd_config /etc/ssh/sshd_config
 EXPOSE 22
