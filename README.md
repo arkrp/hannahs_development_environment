@@ -4,7 +4,6 @@ Hannah Nelson 2026
 TODO:
 Switch over to a sshfs on dev_container setup:
     Remove vesitigial traits (hostkeys, sandbox account, extraneous keys) from files
-        sandbox containerfile
         launchfile
         updatekeysfile
         remove direct port to sandbox container
