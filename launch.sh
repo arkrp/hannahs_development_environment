@@ -11,13 +11,7 @@ echo "done building images"
 #section-end
 #section-start make sure dev_network exists
 echo "initializing dev_network"
-podman network exists dev_network
-if [[ $? == 1 ]]; then
-   echo "dev_network not found. creating network"
-   podman network create dev_network
-else
-   echo "dev_network exists. proceeding."
-fi
+podman network create dev_network
 echo "done initializing dev_network"
 #section-end
 #section-start launch containers
