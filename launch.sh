@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Hello World!"
 set -e
-access_port=9000 # The port which the user should use to ssh into the dev contianer.
+ACCESS_PORT=9000 # The port which the user should use to ssh into the dev contianer.
 project_directory=$(realpath $(dirname $BASH_SOURCE))
 #section-start build containers if needed
 echo "building images"
@@ -18,7 +18,6 @@ echo "done initializing dev_network"
 echo "launching containers"
 podman run \
    -d \
-   -p 9345:22 \
    --network bridge \
    -v workspace:/home/dev/workspace \
    --userns=auto:size=2000 \
@@ -28,7 +27,7 @@ podman run \
    sandbox_container
 podman run \
    -d \
-   -p 9000:22 \
+   -p $ACCESS_PORT:22 \
    -v dev_ssh_directory:/home/dev/.ssh \
    --network bridge \
    --device /dev/fuse \
