@@ -20,8 +20,7 @@ podman run \
    -d \
    -p 9345:22 \
    --network bridge \
-   -v workspace:/home/sandbox/workspace \
-   --cap-add SYS_ADMIN \
+   -v workspace:/home/sandbox/workspace:U \
    --userns=auto:size=2000 \
    --secret dev_key.pub \
    --secret dev_host_key.pub \
@@ -34,6 +33,8 @@ podman run \
    -p 9000:22 \
    -v dev_ssh_directory:/home/dev/.ssh \
    --network bridge \
+   --device /dev/fuse \
+   --cap-add SYS_ADMIN \
    --userns=auto:size=2000 \
    --secret dev_key \
    --secret dev_host_key \
