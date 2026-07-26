@@ -9,6 +9,7 @@ RUN chsh -s /bin/bash dev
 RUN groupadd -g 995 sshd
 RUN usermod -g 995 sshd
 COPY ./files/container_startup_script.sh /app/container_startup_script.sh
+COPY ./files/sandbox.sh /app/sandbox.sh
 COPY ./files/bash.bashrc /etc/bash.bashrc
 COPY ./files/sshd_config /etc/ssh/sshd_config
 EXPOSE 22

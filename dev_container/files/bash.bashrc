@@ -72,10 +72,14 @@ fi
 PS1='${debian_chroot:+($debian_chroot)}\[[01;32m\]\u\[[00m\]:\[[01;34m\]\w\[[00m\]$ '
 LS_COLORS=:':di=0;93:*.png=1;31;107:' ; export LS_COLORS
 alias ls="ls --color"
+if [ ! -d "/home/dev/workspace" ]; then
+   mkdir /home/dev/workspace
+   sshfs -o reconnect dev@sandbox:workspace /home/dev/workspace
+fi
 if [ -z "$TMUX" ]; then
    exec tmux new-session -A -s main
 #  tmux attach || tmux new-session
 fi
 alias vimtarg="tmux -L nvim_target"
 alias csv="column -t -s,"
-alias sandbox="bash /app/scripts/sandbox.sh"
+alias sandbox="bash /app/sandbox.sh"
