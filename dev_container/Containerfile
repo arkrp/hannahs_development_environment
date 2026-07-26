@@ -1,16 +1,44 @@
-FROM docker.io/library/debian:trixie-slim
+FROM docker.io/library/debian:trixie
 WORKDIR app
+#section-start install applications
+#section-start install apt package applications
 RUN apt-get update && apt-get -y install \
    ssh \
    sshfs \
-   tmux
+   tmux \
+   neovim \
+   git \
+   curl \
+   fzf \
+   build-essential \
+   man \
+   sudo
+#section-end
+#section-start install locales
+# These have something to do with how the system displays things
+RUN apt-get update && \
+    apt-get install -y locales && \
+    sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen && \
+    rm -rf /var/lib/apt/lists/*
+#section-end
+#section-start copy the sandbox script over!
+COPY ./files/sandbox.sh /app/sandbox.sh
+#section-end
+#section-end
+#section-start add the dev user
 RUN useradd -m dev
 RUN chsh -s /bin/bash dev
+RUN usermod -a -G sudo dev
+#section-end
+#section-start load bash configuration
+COPY ./files/bash.bashrc /etc/bash.bashrc
+#section-end
+#section-start setup ssh access
 RUN groupadd -g 995 sshd
 RUN usermod -g 995 sshd
-COPY ./files/container_startup_script.sh /app/container_startup_script.sh
-COPY ./files/sandbox.sh /app/sandbox.sh
-COPY ./files/bash.bashrc /etc/bash.bashrc
 COPY ./files/sshd_config /etc/ssh/sshd_config
+COPY ./files/container_startup_script.sh /app/container_startup_script.sh
 EXPOSE 22
 CMD ["/bin/bash", "/app/container_startup_script.sh"]
+#section-end

@@ -1,4 +1,4 @@
-FROM docker.io/library/debian:trixie-slim
+FROM docker.io/library/debian:trixie
 WORKDIR app
 RUN apt-get update && apt-get -y install \
    ssh \
