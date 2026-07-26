@@ -1,12 +1,13 @@
 #!/bin/bash
 echo "Hello World!"
-set -e
 ACCESS_PORT=9000 # The port which the user should use to ssh into the dev contianer.
 project_directory=$(realpath $(dirname $BASH_SOURCE))
 #section-start build containers if needed
 echo "building images"
+set -e
 podman build --jobs 0 -t sandbox_container $project_directory/sandbox_container
 podman build --jobs 0 -t dev_container $project_directory/dev_container
+set +e
 echo "done building images"
 #section-end
 #section-start make sure dev_network exists
