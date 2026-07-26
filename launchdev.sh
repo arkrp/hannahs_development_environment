@@ -23,7 +23,7 @@ podman run \
    --userns=auto:size=2000 \
    --secret dev_key.pub \
    --name sandbox_container \
-   --hostname sandbox_container \
+   --hostname sandbox \
    sandbox_container
 podman run \
    -d \
@@ -35,7 +35,7 @@ podman run \
    --userns=auto:size=2000 \
    --secret dev_key \
    --secret admin_key.pub \
-   --hostname dev_container \
+   --hostname dev \
    --name dev_container \
    dev_container
 echo "done launching containers"
@@ -46,4 +46,5 @@ podman network connect --alias sandbox dev_network sandbox_container
 podman network connect --alias dev dev_network dev_container
 echo "done connecting containers to network!"
 #section-end
+ssh -p 9000 -X -t dev@127.0.0.1
 echo "Serpent Praise"
