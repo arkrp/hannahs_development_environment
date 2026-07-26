@@ -1,18 +1,35 @@
 FROM docker.io/library/debian:trixie
 WORKDIR app
 #section-start install applications
-#section-start install apt package applications
+#section-start install absolute essentials
+#section-start install stuff from apt
 RUN apt-get update && apt-get -y install \
+   sudo \
+   tmux \
    ssh \
    sshfs \
-   tmux \
-   neovim \
    git \
    curl \
-   fzf \
    build-essential \
+   neovim
+#section-end
+#section-start install the sandbox script!
+COPY ./files/sandbox.sh /app/sandbox.sh
+#section-end
+#section-end
+#section-start install helpful extras
+#section-start install stuff from apt
+RUN apt-get update && apt-get -y install \
    man \
-   sudo
+   fzf \
+   pandoc \
+   texlive-latex-recommended \
+   zathura \
+   feh
+#section-end
+#section-start install the readmd script!
+COPY ./files/readmd.sh /app/readmd.sh
+#section-end
 #section-end
 #section-start install locales
 # These have something to do with how the system displays things
@@ -21,9 +38,6 @@ RUN apt-get update && \
     sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
     locale-gen && \
     rm -rf /var/lib/apt/lists/*
-#section-end
-#section-start copy the sandbox script over!
-COPY ./files/sandbox.sh /app/sandbox.sh
 #section-end
 #section-end
 #section-start add the dev user
