@@ -23,8 +23,6 @@ COPY ./files/call_sandbox.sh /app/call_sandbox.sh
 RUN apt-get update && apt-get -y install \
    man \
    fzf \
-   pandoc \
-   texlive-latex-recommended \
    zathura \
    feh
 #section-end
