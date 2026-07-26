@@ -6,6 +6,10 @@ dev_key
    The ssh key which verifies the dev (priveleged account)'s identity
 dev_key.pub
    The corresponding public key for dev_private_key. Distribute this to grant the dev container access! (for sshfs or other)
+dev_host_key
+   Necissary for the dev container to have a consistent identity that doesn't randomly change with updates, but serves no function other functionality.
+sandbox_host_key
+   Similar to dev_host_key but for the sandbox
 
 You make keys with a command that looks like this:
    ssh-keygen -t ed25519 -C "dev@dev" -f $(pwd)/dev_key

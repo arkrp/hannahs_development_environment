@@ -35,6 +35,7 @@ podman run \
    --userns=auto:size=2000 \
    --secret dev_key \
    --secret admin_key.pub \
+   --secret dev_host_key \
    --hostname dev \
    --name dev_container \
    dev_container
