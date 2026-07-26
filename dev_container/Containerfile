@@ -34,6 +34,9 @@ RUN usermod -a -G sudo dev
 #section-start load bash configuration
 COPY ./files/bash.bashrc /etc/bash.bashrc
 #section-end
+#section-start configure tmux
+COPY files/tmux.conf /home/dev/.tmux.conf
+#section-end
 #section-start setup ssh access
 RUN groupadd -g 995 sshd
 RUN usermod -g 995 sshd
