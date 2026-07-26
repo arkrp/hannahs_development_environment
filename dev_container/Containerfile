@@ -13,8 +13,9 @@ RUN apt-get update && apt-get -y install \
    build-essential \
    neovim
 #section-end
-#section-start install the sandbox script!
+#section-start install the sandbox scripts!
 COPY ./files/sandbox.sh /app/sandbox.sh
+COPY ./files/call_sandbox.sh /app/call_sandbox.sh
 #section-end
 #section-end
 #section-start install helpful extras
