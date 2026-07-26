@@ -22,6 +22,7 @@ podman run \
    -v workspace:/home/dev/workspace \
    --userns=auto:size=2000 \
    --secret dev_key.pub \
+   --secret sandbox_host_key \
    --name sandbox_container \
    --hostname sandbox \
    sandbox_container

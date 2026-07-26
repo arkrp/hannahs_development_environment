@@ -8,5 +8,6 @@ AllowAgentForwarding no
 AllowTcpForwarding yes
 X11Forwarding yes
 PrintMotd no
+HostKey /etc/ssh/host_key
 AcceptEnv LANG LC_* COLORTERM NO_COLOR
 Subsystem       sftp    /usr/lib/openssh/sftp-server
