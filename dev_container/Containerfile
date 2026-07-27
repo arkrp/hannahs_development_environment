@@ -59,6 +59,9 @@ RUN cd /home/dev/.config/nvim/ && sudo -u dev git checkout ${NVIM_GIT_COMMIT}
 RUN sudo -u dev nvim +q #this is needed to make the plugins work
 RUN sudo -u dev nvim +PlugInstall +qa #install the nvim plugins
 #section-end
+#section-start make the workspace mount point
+RUN sudo -u dev mkdir /home/dev/workspace
+#section-end
 #section-start setup ssh access
 RUN groupadd -g 995 sshd
 RUN usermod -g 995 sshd

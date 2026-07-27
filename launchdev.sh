@@ -50,5 +50,5 @@ podman network connect --alias sandbox dev_network sandbox_container
 podman network connect --alias dev dev_network dev_container
 echo "done connecting containers to network!"
 #section-end
-ssh -p 9000 -X -t dev@127.0.0.1
+ssh -p 9000 -X -t dev@127.0.0.1 "cd /home/dev/workspace && bash"
 echo "Serpent Praise"
