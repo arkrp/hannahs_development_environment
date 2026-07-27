@@ -13,19 +13,28 @@ RUN apt-get update && \
     locale-gen && \
     rm -rf /var/lib/apt/lists/*
 #section-end
-#section-start install other applications!
 #section-start install system essentials (stuff needed for installing stuff)
 RUN apt-get update && apt-get -y install \
    curl \
    git \
    xz-utils
 #section-end
+#section-start install languages
 #section-start install nodejs
 RUN echo a && curl -L -o /app/node.tar.xz https://nodejs.org/dist/v24.18.0/node-v24.18.0-linux-x64.tar.xz
 RUN tar -xf /app/node.tar.xz -C /app
 RUN mv /app/node-v24.18.0-linux-x64 /app/node
 RUN echo "export PATH=/app/node/bin:$PATH" >> /etc/bash.bashrc
-ENV PATH="/app/node:${PATH}"
+ENV PATH="/app/node/bin:${PATH}"
+#section-end
+#section-end
+#section-end
+#section-start install other applications!
+#section-start install pi agent
+RUN npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+RUN apt-get update && apt-get install -y \
+   fd-find \
+   ripgrep
 #section-end
 #section-start install document programs
 RUN apt-get update && apt-get -y install \
