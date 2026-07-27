@@ -21,6 +21,7 @@ podman run \
    -d \
    --network bridge \
    -v workspace:/home/dev/workspace \
+   -v sandbox_pi_config:/home/dev/.pi \
    --userns=auto:size=2000 \
    --secret dev_key.pub \
    --secret sandbox_host_key \
