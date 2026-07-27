@@ -6,9 +6,24 @@ RUN apt-get update && apt-get -y install \
    sshfs
 #section-end
 #section-start install other applications!
+#section-start install system essentials (stuff needed for installing stuff)
+RUN apt-get update && apt-get -y install \
+   curl \
+   git \
+   xz-utils
+#section-end
+#section-start install nodejs
+RUN echo a && curl -L -o /app/node.tar.xz https://nodejs.org/dist/v24.18.0/node-v24.18.0-linux-x64.tar.xz
+RUN tar -xf /app/node.tar.xz -C /app
+RUN mv /app/node-v24.18.0-linux-x64 /app/node
+RUN echo "export PATH=/app/node/bin:$PATH" >> /etc/bash.bashrc
+ENV PATH="/app/node:${PATH}"
+#section-end
+#section-start install document programs
 RUN apt-get update && apt-get -y install \
    pandoc \
    texlive-latex-recommended
+#section-end
 #section-end
 #section-start make dev account
 RUN useradd -m dev
