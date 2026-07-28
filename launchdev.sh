@@ -50,5 +50,6 @@ podman network connect --alias sandbox dev_network sandbox_container
 podman network connect --alias dev dev_network dev_container
 echo "done connecting containers to network!"
 #section-end
+ssh -p 9000 dev@127.0.0.1 "sshfs -o reconnect dev@sandbox:/home/dev/workspace /home/dev/workspace"
 ssh -p 9000 -X -t dev@127.0.0.1 "cd /home/dev/workspace && bash"
 echo "Serpent Praise"
