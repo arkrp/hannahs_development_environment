@@ -20,6 +20,10 @@ RUN apt-get update && apt-get -y install \
    xz-utils
 #section-end
 #section-start install languages
+#section-start install python
+RUN apt-get update && apt-get -y install \
+   python3
+#section-end
 #section-start install nodejs
 RUN echo a && curl -L -o /app/node.tar.xz https://nodejs.org/dist/v24.18.0/node-v24.18.0-linux-x64.tar.xz
 RUN tar -xf /app/node.tar.xz -C /app
