@@ -43,7 +43,8 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update && apt-get -y install \
    neovim \
    fzf \
-   tmux
+   tmux \
+   xclip
 #section-end
 #section-start install document programs
 RUN apt-get update && apt-get -y install \
