@@ -1,13 +1,31 @@
-FROM docker.io/library/debian:trixie
+#section-start inner layer
+FROM docker.io/library/debian:trixie as dev-core
+# This is the inner core, basically coantining only the functioning ssh
 WORKDIR app
+RUN apt-get update && apt-get -y install \
+   ssh \
+   sshfs
+RUN useradd -m dev
+RUN chsh -s /bin/bash dev
+RUN groupadd -g 995 sshd
+RUN usermod -g 995 sshd
+COPY ./files/sshd_config /etc/ssh/sshd_config
+COPY ./files/container_startup_script.sh /app/container_startup_script.sh
+EXPOSE 22
+CMD ["/bin/bash", "/app/container_startup_script.sh"]
+#section-end
+#section-start outer layer
+FROM dev-core
+WORKDIR app
+#section-start give the dev user sudo
+RUN usermod -a -G sudo dev
+#section-end
 #section-start install applications
 #section-start install absolute essentials
 #section-start install stuff from apt
 RUN apt-get update && apt-get -y install \
    sudo \
    tmux \
-   ssh \
-   sshfs \
    git \
    curl \
    build-essential \
@@ -40,8 +58,6 @@ RUN apt-get update && \
 #section-end
 #section-end
 #section-start add the dev user
-RUN useradd -m dev
-RUN chsh -s /bin/bash dev
 RUN usermod -a -G sudo dev
 #section-end
 #section-start load bash configuration
@@ -62,11 +78,4 @@ RUN sudo -u dev nvim +PlugInstall +qa #install the nvim plugins
 #section-start make the workspace mount point
 RUN sudo -u dev mkdir /home/dev/workspace
 #section-end
-#section-start setup ssh access
-RUN groupadd -g 995 sshd
-RUN usermod -g 995 sshd
-COPY ./files/sshd_config /etc/ssh/sshd_config
-COPY ./files/container_startup_script.sh /app/container_startup_script.sh
-EXPOSE 22
-CMD ["/bin/bash", "/app/container_startup_script.sh"]
 #section-end
