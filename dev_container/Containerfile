@@ -1,6 +1,6 @@
-#section-start inner layer
-FROM docker.io/library/debian:trixie as dev-core
+#section-start core layer
 # This is the inner core, contains the functionality necessary for the ssh connection and not much else
+FROM docker.io/library/debian:trixie as dev-core
 WORKDIR app
 #section-start install ssh and sshfs
 RUN apt-get update && apt-get -y install \
@@ -24,12 +24,10 @@ EXPOSE 22
 CMD ["/bin/bash", "/app/container_startup_script.sh"]
 #section-end
 #section-end
-#section-start outer layer
-FROM dev-core
+#section-start installation layer
+FROM dev-core as dev-installed
+# This layer has the programs installed but not configured
 WORKDIR app
-#section-start give the dev user sudo
-RUN usermod -a -G sudo dev
-#section-end
 #section-start install applications
 #section-start install absolute essentials
 #section-start install stuff from apt
@@ -67,7 +65,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 #section-end
 #section-end
-#section-start add the dev user
+#section-end
+#section-start configuration layer
+#this layer configured the programs for use
+FROM dev-installed
+WORKDIR app
+#section-start give the dev user sudo
 RUN usermod -a -G sudo dev
 #section-end
 #section-start load bash configuration
