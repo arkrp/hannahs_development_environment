@@ -51,6 +51,7 @@ RUN apt-get update && apt-get -y install \
    pandoc \
    texlive-latex-recommended
 #section-end
+RUN echo "export EDITOR=\"nvim\"" >> /etc/bash.bashrc
 #section-start make dev account
 RUN useradd -m dev
 RUN chsh -s /bin/bash dev
