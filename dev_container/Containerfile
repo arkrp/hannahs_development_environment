@@ -1,18 +1,28 @@
 #section-start inner layer
 FROM docker.io/library/debian:trixie as dev-core
-# This is the inner core, basically coantining only the functioning ssh
+# This is the inner core, contains the functionality necessary for the ssh connection and not much else
 WORKDIR app
+#section-start install ssh and sshfs
 RUN apt-get update && apt-get -y install \
    ssh \
    sshfs
+#section-end
+#section-start make user
 RUN useradd -m dev
 RUN chsh -s /bin/bash dev
+#section-end
+#section-start make the workspace mount point
+RUN mkdir /home/dev/workspace
+RUN chown dev:dev /home/dev/workspace
+#section-end
+#section-start configure ssh stuff for launch
 RUN groupadd -g 995 sshd
 RUN usermod -g 995 sshd
 COPY ./files/sshd_config /etc/ssh/sshd_config
 COPY ./files/container_startup_script.sh /app/container_startup_script.sh
 EXPOSE 22
 CMD ["/bin/bash", "/app/container_startup_script.sh"]
+#section-end
 #section-end
 #section-start outer layer
 FROM dev-core
@@ -74,8 +84,5 @@ RUN cd /home/dev/.config/nvim/ && sudo -u dev git remote set-url origin git@gith
 RUN cd /home/dev/.config/nvim/ && sudo -u dev git checkout ${NVIM_GIT_COMMIT}
 RUN sudo -u dev nvim +q #this is needed to make the plugins work
 RUN sudo -u dev nvim +PlugInstall +qa #install the nvim plugins
-#section-end
-#section-start make the workspace mount point
-RUN sudo -u dev mkdir /home/dev/workspace
 #section-end
 #section-end
