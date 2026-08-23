@@ -14,6 +14,8 @@ This container currently does not have all features of the previous iteration. T
 Convinience custom commands (intended for normal use):
     `readmd <.md document>`
         renders and displays a markdown document with github standard markdown. This is very good for reading documentation!
+    `csv <csv document>`
+        prints out a csv document nicely
 
 Internal custom commands (not intended for normal use):
     `sandbox <command>`
