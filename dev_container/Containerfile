@@ -72,6 +72,9 @@ FROM dev-installed
 WORKDIR app
 #section-start give the dev user sudo
 RUN usermod -a -G sudo dev
+#section-start give the user a password so they can use sudo
+RUN echo "dev:palp" | chpasswd
+#section-end
 #section-end
 #section-start load bash configuration
 COPY ./files/bash.bashrc /etc/bash.bashrc
