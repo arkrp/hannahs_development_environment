@@ -1,3 +1,4 @@
+
 FROM docker.io/library/debian:trixie as sandbox-core
 WORKDIR app
 #section-start install essential ssh stuff
@@ -23,7 +24,7 @@ COPY ./files/sshd_config /etc/ssh/sshd_config
 EXPOSE 22
 CMD ["/bin/bash", "/app/container_startup_script.sh"]
 #section-end
-FROM sandbox-core
+FROM sandbox-core as sandbox
 WORKDIR app
 #section-start install locales
 # These have something to do with how the system displays things
@@ -38,6 +39,7 @@ RUN apt-get update && apt-get -y install \
    curl \
    git \
    sudo \
+   build-essential \
    xz-utils
 #section-end
 #section-start install languages
@@ -51,6 +53,9 @@ RUN tar -xf /app/node.tar.xz -C /app
 RUN mv /app/node-v24.18.0-linux-x64 /app/node
 RUN echo "export PATH=/app/node/bin:$PATH" >> /etc/bash.bashrc
 ENV PATH="/app/node/bin:${PATH}"
+#section-end
+#section-start install rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sudo -u dev sh -s -- -y
 #section-end
 #section-end
 #section-start install pi agent
@@ -71,7 +76,6 @@ RUN apt-get update && apt-get -y install \
    pandoc \
    texlive-latex-recommended
 #section-end
-RUN echo "export EDITOR=\"nvim\"" >> /etc/bash.bashrc
 #section-start install nvim configuration
 ARG NVIM_GIT_COMMIT="81e4becd5e897e07fdb68ebe0d279803623fc855"
 RUN sudo -u dev mkdir -p /home/dev/.config/nvim
@@ -80,4 +84,5 @@ RUN cd /home/dev/.config/nvim/ && sudo -u dev git remote set-url origin git@gith
 RUN cd /home/dev/.config/nvim/ && sudo -u dev git checkout ${NVIM_GIT_COMMIT}
 RUN sudo -u dev nvim +q #this is needed to make the plugins work
 RUN sudo -u dev nvim +PlugInstall +qa #install the nvim plugins
+RUN echo "export EDITOR=\"nvim\"" >> /etc/bash.bashrc
 #section-end
