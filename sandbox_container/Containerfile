@@ -1,6 +1,8 @@
-
 FROM docker.io/library/debian:trixie as sandbox-core
 WORKDIR app
+#section-start make sure our base image is fully upgraded
+RUN apt-get update && apt-get upgrade -y
+#section-end
 #section-start install essential ssh stuff
 RUN apt-get update && apt-get -y install \
    ssh \
@@ -37,6 +39,7 @@ RUN apt-get update && \
 #section-start install system essentials (stuff needed for installing stuff)
 RUN apt-get update && apt-get -y install \
    curl \
+   wget \
    git \
    sudo \
    build-essential \
@@ -56,6 +59,13 @@ ENV PATH="/app/node/bin:${PATH}"
 #section-end
 #section-start install rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sudo -u dev sh -s -- -y
+#section-end
+#section-start install c#
+RUN wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+RUN rm packages-microsoft-prod.deb
+RUN apt-get update && apt-get -y install \
+   dotnet-sdk-10.0
 #section-end
 #section-end
 #section-start install pi agent
