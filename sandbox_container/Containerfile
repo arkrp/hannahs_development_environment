@@ -75,25 +75,8 @@ RUN apt-get update && apt-get install -y \
    fd-find \
    ripgrep
 #section-end
-#section-start install neovim (and plugin supporting stuff)
-RUN apt-get update && apt-get -y install \
-   neovim \
-   fzf \
-   tmux \
-   xclip
-#section-end
 #section-start install document programs
 RUN apt-get update && apt-get -y install \
    pandoc \
    texlive-latex-recommended
-#section-end
-#section-start install nvim configuration
-ARG NVIM_GIT_COMMIT="81e4becd5e897e07fdb68ebe0d279803623fc855"
-RUN sudo -u dev mkdir -p /home/dev/.config/nvim
-RUN sudo -u dev git clone https://github.com/arkrp/vimrc.git /home/dev/.config/nvim
-RUN cd /home/dev/.config/nvim/ && sudo -u dev git remote set-url origin git@github.com:arkrp/vimrc.git
-RUN cd /home/dev/.config/nvim/ && sudo -u dev git checkout ${NVIM_GIT_COMMIT}
-RUN sudo -u dev nvim +q #this is needed to make the plugins work
-RUN sudo -u dev nvim +PlugInstall +qa #install the nvim plugins
-RUN echo "export EDITOR=\"nvim\"" >> /etc/bash.bashrc
 #section-end

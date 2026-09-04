@@ -36,8 +36,11 @@ RUN apt-get update && apt-get -y install \
    tmux \
    git \
    curl \
-   build-essential \
-   neovim
+   build-essential
+#section-end
+#section-start install neovim
+RUN curl -o /app/nvim.tar.gz -L https://github.com/neovim/neovim/releases/download/v0.12.5/nvim-linux-x86_64.tar.gz
+RUN tar --strip-components=1 -xzf /app/nvim.tar.gz -C /usr
 #section-end
 #section-start install the sandbox scripts!
 COPY ./files/sandbox.sh /app/sandbox.sh
@@ -83,7 +86,7 @@ COPY ./files/bash.bashrc /etc/bash.bashrc
 COPY files/tmux.conf /home/dev/.tmux.conf
 #section-end
 #section-start install nvim configuration
-ARG NVIM_GIT_COMMIT="81e4becd5e897e07fdb68ebe0d279803623fc855"
+ARG NVIM_GIT_COMMIT="42d0d1708aead5df85e2cb0a60be85a1af47f041"
 RUN sudo -u dev mkdir -p /home/dev/.config/nvim
 RUN sudo -u dev git clone https://github.com/arkrp/vimrc.git /home/dev/.config/nvim
 RUN cd /home/dev/.config/nvim/ && sudo -u dev git remote set-url origin git@github.com:arkrp/vimrc.git
