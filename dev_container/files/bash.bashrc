@@ -79,5 +79,4 @@ fi
 alias vimtarg="tmux -L nvim_target"
 alias csv="column -t -s,"
 alias sandbox="bash /app/sandbox.sh"
-alias call_sandbox="bash /app/call_sandbox.sh"
 alias readmd="bash /app/readmd.sh"

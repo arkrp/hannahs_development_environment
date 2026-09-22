@@ -18,7 +18,7 @@ Convinience custom commands (intended for normal use):
         prints out a csv document nicely
 
 Internal custom commands (not intended for normal use):
-    `sandbox <command>`
+    `sandbox -t <command>`
         the sandbox command connects to a tty on the sandbox container with the desired command. This is the main way to enter the sandbox.
-    `call_sandbox <command>`
+    `sandbox <command>`
         this is similar to the sandbox command but it does not connect the tty. This means it can be used to pipe output over by ssh.
