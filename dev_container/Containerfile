@@ -52,6 +52,7 @@ RUN apt-get update && apt-get -y install \
    man \
    fzf \
    zathura \
+   xclip \
    feh
 #section-end
 #section-start install the readmd script!
