@@ -44,7 +44,6 @@ RUN tar --strip-components=1 -xzf /app/nvim.tar.gz -C /usr
 #section-end
 #section-start install the sandbox scripts!
 COPY ./files/sandbox.sh /app/sandbox.sh
-COPY ./files/call_sandbox.sh /app/call_sandbox.sh
 #section-end
 #section-end
 #section-start install helpful extras
