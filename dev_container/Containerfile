@@ -20,6 +20,7 @@ RUN groupadd -g 995 sshd
 RUN usermod -g 995 sshd
 COPY ./files/sshd_config /etc/ssh/sshd_config
 COPY ./files/container_startup_script.sh /app/container_startup_script.sh
+COPY ./files/non_core_startup_script.sh /app/non_core_startup_script.sh
 EXPOSE 22
 CMD ["/bin/bash", "/app/container_startup_script.sh"]
 #section-end
@@ -78,6 +79,10 @@ RUN usermod -a -G sudo dev
 #section-start give the user a password so they can use sudo
 RUN echo "dev:palp" | chpasswd
 #section-end
+#section-end
+#section-start make the dev_scripts mount point
+RUN mkdir /home/dev/dev_scripts
+RUN chown dev:dev /home/dev/dev_scripts
 #section-end
 #section-start load bash configuration
 COPY ./files/bash.bashrc /etc/bash.bashrc

@@ -12,4 +12,5 @@ cp /run/secrets/dev_host_key /etc/ssh/host_key
 chmod 600 /etc/ssh/host_key
 echo "activating sshd"
 chmod 755 /var/run/sshd
+bash /app/non_core_setup_script.sh
 /usr/sbin/sshd -D

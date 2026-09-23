@@ -32,6 +32,7 @@ podman run \
    sandbox_container
 podman run \
    -d \
+   -v dev_scripts:/home/dev/dev_scripts \
    -p $ACCESS_PORT:22 \
    -v dev_ssh_directory:/home/dev/.ssh \
    --network bridge \
