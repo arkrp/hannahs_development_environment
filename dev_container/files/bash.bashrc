@@ -1,8 +1,3 @@
-# System-wide .bashrc file for interactive bash(1) shells.
-
-# To enable the settings / commands in this file for login shells as well,
-# this file has to be sourced in /etc/profile.
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -20,25 +15,6 @@ fi
 if ! [ -n "${SUDO_USER}" -a -n "${SUDO_PS1}" ]; then
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
-
-# Commented out, don't overwrite xterm -T "title" -n "icontitle" by default.
-# If this is an xterm set the title to user@host:dir
-#case "$TERM" in
-#xterm*|rxvt*)
-#    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-#    ;;
-#*)
-#    ;;
-#esac
-
-# enable bash completion in interactive shells
-#if ! shopt -oq posix; then
-#  if [ -f /usr/share/bash-completion/bash_completion ]; then
-#    . /usr/share/bash-completion/bash_completion
-#  elif [ -f /etc/bash_completion ]; then
-#    . /etc/bash_completion
-#  fi
-#fi
 
 # sudo hint
 if [ ! -e "$HOME/.sudo_as_admin_successful" ] && [ ! -e "$HOME/.hushlogin" ] ; then
@@ -69,6 +45,7 @@ if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found/command-no
 		fi
 	}
 fi
+
 PS1='${debian_chroot:+($debian_chroot)}\[[01;32m\]\u\[[00m\]:\[[01;34m\]\w\[[00m\]$ '
 LS_COLORS=:':di=0;93:*.png=1;31;107:' ; export LS_COLORS
 alias ls="ls --color"
@@ -80,3 +57,4 @@ alias vimtarg="tmux -L nvim_target"
 alias csv="column -t -s,"
 alias sandbox="bash /app/sandbox.sh"
 alias readmd="bash /app/readmd.sh"
+export EDITOR=/usr/bin/nvim
