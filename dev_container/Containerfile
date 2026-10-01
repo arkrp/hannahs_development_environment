@@ -91,7 +91,7 @@ COPY ./files/bash.bashrc /etc/bash.bashrc
 COPY files/tmux.conf /home/dev/.tmux.conf
 #section-end
 #section-start install nvim configuration
-ARG NVIM_GIT_COMMIT="42d0d1708aead5df85e2cb0a60be85a1af47f041"
+ARG NVIM_GIT_COMMIT="2c2898997f4c6078a49cd6d26aa6936ddf661dd5"
 RUN sudo -u dev mkdir -p /home/dev/.config/nvim
 RUN sudo -u dev git clone https://github.com/arkrp/vimrc.git /home/dev/.config/nvim
 RUN cd /home/dev/.config/nvim/ && sudo -u dev git remote set-url origin git@github.com:arkrp/vimrc.git
