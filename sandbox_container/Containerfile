@@ -80,3 +80,8 @@ RUN apt-get update && apt-get -y install \
    pandoc \
    texlive-latex-recommended
 #section-end
+#section-start install neovim
+# this is for testing neovim plugins and configurations
+RUN curl -o /app/nvim.tar.gz -L https://github.com/neovim/neovim/releases/download/v0.12.5/nvim-linux-x86_64.tar.gz
+RUN tar --strip-components=1 -xzf /app/nvim.tar.gz -C /usr
+#section-end
