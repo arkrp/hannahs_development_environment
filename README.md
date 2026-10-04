@@ -16,9 +16,5 @@ Convinience custom commands (intended for normal use):
         renders and displays a markdown document with github standard markdown. This is very good for reading documentation!
     `csv <csv document>`
         prints out a csv document nicely
-
-Internal custom commands (not intended for normal use):
-    `sandbox -t <command>`
+    `sandbox '<command>'`
         the sandbox command connects to a tty on the sandbox container with the desired command. This is the main way to enter the sandbox.
-    `sandbox <command>`
-        this is similar to the sandbox command but it does not connect the tty. This means it can be used to pipe output over by ssh.

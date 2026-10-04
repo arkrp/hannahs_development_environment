@@ -1,17 +1,8 @@
-if [[ $1 == "-t" ]]; then
-   if [[ $(pwd) == "/home/dev/workspace/"* ]] || [ $(pwd) == "/home/dev/workspace" ]; then
-      shift 1
-      ssh -t dev@sandbox "cd $(pwd); bash -i -c \"$@\""
-      exit 0
-   else
-      echo "sandbox only works inside the /home/dev/workspace directory."
-      exit 1
-   fi
+#!/bin/bash
+if [[ $(pwd) == "/home/dev/workspace/"* ]] || [ $(pwd) == "/home/dev/workspace" ]; then
+   ssh -t -q dev@sandbox "cd $(pwd); $@"
+   exit 0
 else
-   if [[ $(pwd) == "/home/dev/workspace/"* ]] || [ $(pwd) == "/home/dev/workspace" ]; then
-      ssh dev@sandbox "cd $(pwd); $@"
-   else
-      echo "sandbox only works inside the /home/dev/workspace directory."
-      exit 1
-   fi
+   echo "sandbox only works inside the /home/dev/workspace directory." >&2
+   exit 1
 fi
